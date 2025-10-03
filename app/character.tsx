@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const scale = 0.6;
 
@@ -52,11 +52,13 @@ const kayleeMsg = "Hi, I’m Kaylee… 5'2, powered by butter chicken, and carri
 export default function Character(props: { target: string }) {
     const [jokes, setJokes] = useState<string[]>([]);
     const [count, setCount] = useState<number>(0);
+    const msgsContainer = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         document.onclick = (e) => {
             setJokes(props.target == "raid" ? [...jokes, raid_jokes[count]] : [...jokes, kaylee_jokes[count]]);
             setCount(count + 1);
+            setTimeout(() => msgsContainer.current && (msgsContainer.current.scrollTop = msgsContainer.current.scrollHeight), 50);
         };
     });
 
@@ -71,7 +73,7 @@ export default function Character(props: { target: string }) {
     return (
         <div className="character absolute left-1/2 top-1/2 -translate-1/2 flex">
             <Image className="img" width={512 * scale} height={768 * scale} alt="your character is shy" src={props.target == "raid" ? "/raid.png" : "/kaylee.png"} />
-            <div className="msgs bg3 p-4 rounded-2xl overflow-y-auto flex flex-col gap-3.5 scrollbar-hide" style={{ width: 500, height: 768 * scale }}>
+            <div ref={msgsContainer} className="msgs bg3 p-4 rounded-2xl overflow-y-auto flex flex-col gap-3.5 scrollbar-hide" style={{ width: 500, height: 768 * scale }}>
                 {message(props.target == "raid" ? raidMsg : kayleeMsg)}
                 {jokes.map((e) => e && message(e))}
             </div>
