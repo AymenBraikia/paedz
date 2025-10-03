@@ -199,6 +199,7 @@ body {
         top: 0;
         left: 50%;
         translate: -50% 0;
+        padding: 10px 0;
     }
 
     .img {
