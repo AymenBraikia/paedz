@@ -43,7 +43,6 @@ const kaylee_jokes = [
     "My cats think they adopted me.",
     "Roblox is my second home. The first one is the jungle.",
     "I do workouts… then undo them with chicken.",
-    "People say I have big eyebrows. I say they’re just bold.",
 ];
 
 const raidMsg = "Welcome! Don’t mind me flexing this money bag… it’s just from selling half my watch collection. click to hear more about me";
